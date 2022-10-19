@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import ContainerMain from "./components/Templates/ContainerMain";
+import Contacts from "./components/Templates/Contacts";
+import Chat from "./components/Templates/Chat";
 
-function App() {
+const App = () => {
+  const [contacts, setContacts] = useState([
+    { avatar: "https://www.w3schools.com/howto/img_avatar2.png" },
+    { avatar: "https://www.w3schools.com/howto/img_avatar2.png" },
+    { avatar: "https://www.w3schools.com/howto/img_avatar2.png" },
+    { avatar: "https://www.w3schools.com/howto/img_avatar2.png" },
+    { avatar: "https://www.w3schools.com/howto/img_avatar2.png" },
+    { avatar: "https://www.w3schools.com/howto/img_avatar2.png" },
+  ]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ContainerMain>
+      <Contacts contacts={contacts} />
+      <Chat />
+    </ContainerMain>
   );
-}
+};
 
 export default App;
