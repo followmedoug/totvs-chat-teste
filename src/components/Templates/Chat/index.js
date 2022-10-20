@@ -1,8 +1,14 @@
 import React from "react";
+import ActiveChat from "../../Organisms/ActiveChat";
+import Intro from "../../Organisms/Intro";
 import Container from "./style";
 
-const Chat = () => {
-  return <Container>Chat</Container>;
+const Chat = ({ activeChat, user }) => {
+  return (
+    <Container>
+      {!activeChat.id ? <Intro /> : <ActiveChat user={user} />}
+    </Container>
+  );
 };
 
 export default Chat;

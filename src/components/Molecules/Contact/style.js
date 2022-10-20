@@ -6,16 +6,26 @@ const Container = styled.div`
   align-items: center;
   height: 70px;
   padding: 0 15px;
+  background-color: ${({ active, theme: { colors } }) =>
+    active ? colors.background.hover : "inherit"};
+
+  :hover {
+    background-color: ${({ theme: { colors } }) => colors.background.hover};
+  }
 `;
 
 const ContentWrapper = styled.div`
   border-bottom: 1px solid ${({ theme: { colors } }) => colors.border.primary};
   display: flex;
   flex: 1;
+  height: 100%;
   flex-direction: column;
   justify-content: center;
   margin-left: 15px;
   padding-right: 15px;
+
+  flex-wrap: wrap;
+  min-width: 0;
 `;
 
 const Line = styled.div`
@@ -28,6 +38,7 @@ const Line = styled.div`
 const Name = styled.p`
   font-size: 1.063rem;
   color: ${({ theme: { colors } }) => colors.text.black};
+  margin: 0;
 `;
 
 const Date = styled.p`

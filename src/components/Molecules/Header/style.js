@@ -8,4 +8,12 @@ const Container = styled.header`
   padding: 0 15px;
 `;
 
-export default Container;
+const AvatarWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
+const Name = styled.p`
+  margin-left: 15px;
+`;
+
+export { Container, AvatarWrapper, Name };

@@ -10,29 +10,22 @@ import {
   MessageWrapper,
 } from "./style";
 
-const Contact = ({ contact }) => {
+const Contact = ({ contact, onClick, active }) => {
   return (
-    <Container>
+    <Container active={active} onClick={() => onClick(contact)}>
       <Avatar size="big" src={contact.avatar} />
       <ContentWrapper>
         <Line>
           <>
-            <Name>Teste 123</Name>
+            <Name>{contact.name}</Name>
           </>
           <>
-            <Date>12:51</Date>
+            <Date>{contact.date}</Date>
           </>
         </Line>
         <Line>
           <MessageWrapper>
-            <Message>
-              Texto meramente ilustrativo Texto meramente ilustrativo Texto
-              meramente ilustrativo Texto meramente ilustrativo Texto meramente
-              ilustrativo Texto meramente ilustrativo Texto meramente
-              ilustrativo Texto meramente ilustrativo Texto meramente
-              ilustrativo Texto meramente ilustrativo Texto meramente
-              ilustrativo{" "}
-            </Message>
+            <Message>{contact.message}</Message>
           </MessageWrapper>
         </Line>
       </ContentWrapper>
