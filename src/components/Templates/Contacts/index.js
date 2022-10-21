@@ -16,6 +16,7 @@ const Contacts = ({ contacts = [], onClick, active }) => {
   const dispatch = useDispatch();
 
   const { data } = useSelector((state) => state.contact);
+  const { activeChats } = useSelector((state) => state.user);
 
   const [showNewChat, setShowNewChat] = useState(true);
 
@@ -32,6 +33,7 @@ const Contacts = ({ contacts = [], onClick, active }) => {
           closeNewChat={() => {
             setShowNewChat(false);
           }}
+          onClick={onClick}
         />
       ) : (
         <>
@@ -41,7 +43,11 @@ const Contacts = ({ contacts = [], onClick, active }) => {
             buttons={buttons}
           />
           <SearchBar />
-          <ContactList active={active} onClick={onClick} contacts={contacts} />
+          <ContactList
+            active={active}
+            onClick={onClick}
+            contacts={activeChats}
+          />
         </>
       )}
     </Container>

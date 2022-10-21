@@ -6,7 +6,11 @@ import Container from "./style";
 const Chat = ({ activeChat, user }) => {
   return (
     <Container>
-      {!activeChat.id ? <Intro /> : <ActiveChat user={user} />}
+      {!activeChat.id ? (
+        <Intro />
+      ) : (
+        <ActiveChat user={user} contact={activeChat} />
+      )}
     </Container>
   );
 };

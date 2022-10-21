@@ -3,8 +3,11 @@ import React, { useState } from "react";
 import ContainerMain from "./components/Templates/ContainerMain";
 import Contacts from "./components/Templates/Contacts";
 import Chat from "./components/Templates/Chat";
+import { useSelector } from "react-redux";
 
 const App = () => {
+  const user = useSelector((state) => state.user);
+
   const contacts = [
     {
       id: 1,
@@ -21,12 +24,6 @@ const App = () => {
       message: "Cade o dinheiro que você ta me devendo?",
     },
   ];
-
-  const [user, setUser] = useState({
-    id: 1,
-    avatar: "https://www.w3schools.com/howto/img_avatar2.png",
-    name: "Douglas Mateus",
-  });
 
   const [activeChat, setActiveChat] = useState({});
 

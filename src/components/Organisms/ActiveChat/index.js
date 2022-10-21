@@ -1,11 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
 import EmojiPicker from "emoji-picker-react";
+import { useDispatch, useSelector } from "react-redux";
 
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import MoreVertRoundedIcon from "@mui/icons-material/MoreVertRounded";
 import MoodRoundedIcon from "@mui/icons-material/MoodRounded";
 import SendRoundedIcon from "@mui/icons-material/SendRounded";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
+
+import { sendMessageRequest } from "../../../store/reducers/userSlice";
+import { getMessagesRequest } from "../../../store/reducers/messageSlice";
 
 import Header from "../../Molecules/Header/index.js";
 import Message from "../../Atoms/Message/index.js";
@@ -34,40 +38,25 @@ const ActionsButton = ({ handleOpenEmoji, handleCloseEmoji, open = true }) => {
   );
 };
 
-const ActiveChat = ({ user }) => {
+const ActiveChat = ({ user, contact }) => {
+  const { data } = useSelector((state) => state.message);
+
+  const dispatch = useDispatch();
   const body = useRef();
 
   const [isEmojiOpen, setIsEmojiOpen] = useState(false);
   const [message, setMessage] = useState("");
-  const [messages, setMessages] = useState([
-    { author: 1, body: "E ai meu querido!" },
-    { author: 2, body: "E ai meu querido!" },
-    { author: 1, body: "E ai meu querido!" },
-    { author: 2, body: "E ai meu querido!" },
-    { author: 1, body: "E ai meu querido!" },
-    { author: 2, body: "E ai meu querido!" },
-    { author: 1, body: "E ai meu querido!" },
-    { author: 2, body: "E ai meu querido!" },
-    { author: 1, body: "E ai meu querido!" },
-    { author: 2, body: "E ai meu querido!" },
-    { author: 1, body: "E ai meu querido!" },
-    { author: 2, body: "E ai meu querido!" },
-    { author: 1, body: "E ai meu querido!" },
-    { author: 2, body: "E ai meu querido!" },
-    { author: 1, body: "E ai meu querido!" },
-    { author: 2, body: "E ai meu querido!" },
-    { author: 1, body: "E ai meu querido!" },
-    { author: 2, body: "E ai meu querido!" },
-    { author: 1, body: "E ai meu querido!" },
-    { author: 2, body: "E ai meu querido!" },
-  ]);
+
+  useEffect(() => {
+    dispatch(getMessagesRequest());
+  }, []);
 
   useEffect(() => {
     if (body.current.scrollHeight > body.current.offsetHeight) {
       body.current.scrollTop =
         body.current.scrollHeight - body.current.offsetHeight;
     }
-  }, [messages]);
+  }, [data]);
 
   const handleEmojiClick = (e) => {
     setMessage(message + e.emoji);
@@ -81,16 +70,26 @@ const ActiveChat = ({ user }) => {
     setIsEmojiOpen(false);
   };
 
+  const handleSendMessage = () => {
+    dispatch(
+      sendMessageRequest({
+        content: message,
+        contactOrigin: user.id,
+        contactDestination: contact.id,
+      })
+    );
+  };
+
   return (
     <Container>
       <Header
-        name="Fulano de tal"
+        name={contact.name}
         avatarLink="https://www.w3schools.com/howto/img_avatar2.png"
         buttons={[<SearchRoundedIcon />, <MoreVertRoundedIcon />]}
       />
       <ChatBody ref={body}>
-        {messages.map((msg, key) => (
-          <Message user={user} key={key} data={msg} />
+        {data.map((msg) => (
+          <Message user={user} key={msg.id} data={msg} />
         ))}
       </ChatBody>
       <EmojiWrapper open={isEmojiOpen}>
@@ -115,7 +114,7 @@ const ActiveChat = ({ user }) => {
           />
         </InputWrapper>
         <ButtonsWrapper>
-          <Button open>
+          <Button open onClick={() => handleSendMessage()}>
             <SendRoundedIcon />
           </Button>
         </ButtonsWrapper>

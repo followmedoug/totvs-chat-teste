@@ -5,30 +5,7 @@ import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
 import { Container, Header, Button, Title, List, Item, Name } from "./style";
 import Avatar from "../../Atoms/Avatar";
 
-const NewChat = ({ closeNewChat, data }) => {
-  const [items, setItems] = useState([
-    {
-      id: 1,
-      avatar: "https://www.w3schools.com/howto/img_avatar2.png",
-      name: "Douglas Mateus",
-    },
-    {
-      id: 2,
-      avatar: "https://www.w3schools.com/howto/img_avatar2.png",
-      name: "Douglas Mateus",
-    },
-    {
-      id: 3,
-      avatar: "https://www.w3schools.com/howto/img_avatar2.png",
-      name: "Douglas Mateus",
-    },
-    {
-      id: 4,
-      avatar: "https://www.w3schools.com/howto/img_avatar2.png",
-      name: "Douglas Mateus",
-    },
-  ]);
-
+const NewChat = ({ closeNewChat, data, onClick }) => {
   return (
     <Container>
       <Header>
@@ -39,7 +16,7 @@ const NewChat = ({ closeNewChat, data }) => {
       </Header>
       <List>
         {data.map((item) => (
-          <Item key={item.id}>
+          <Item key={item.id} onClick={() => onClick(item)}>
             <Avatar
               size="big"
               src="https://www.w3schools.com/howto/img_avatar2.png"

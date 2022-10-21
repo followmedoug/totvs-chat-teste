@@ -9,17 +9,24 @@ import {
 } from "./style";
 
 const Message = ({ data, user }) => {
+  console.log(user);
   return (
-    <Container author={user.id === data.author}>
-      <MessageItem author={user.id === data.author}>
-        <TextWrapper>
-          <Text>{data.body}</Text>
-        </TextWrapper>
-        <DateWrapper>
-          <Date>19:00</Date>
-        </DateWrapper>
-      </MessageItem>
-    </Container>
+    <>
+      {!data ? (
+        <></>
+      ) : (
+        <Container author={user.id === data?.origin?.id}>
+          <MessageItem author={user.id === data?.origin?.id}>
+            <TextWrapper>
+              <Text>{data.content}</Text>
+            </TextWrapper>
+            <DateWrapper>
+              <Date>19:00</Date>
+            </DateWrapper>
+          </MessageItem>
+        </Container>
+      )}
+    </>
   );
 };
 
