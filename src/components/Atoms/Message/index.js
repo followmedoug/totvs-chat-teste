@@ -9,7 +9,6 @@ import {
 } from "./style";
 
 const Message = ({ data, user }) => {
-  console.log(user);
   return (
     <>
       {!data ? (

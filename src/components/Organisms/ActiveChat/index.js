@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import EmojiPicker from "emoji-picker-react";
 import { useDispatch, useSelector } from "react-redux";
+import socketIOClient from "socket.io-client";
 
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import MoreVertRoundedIcon from "@mui/icons-material/MoreVertRounded";
@@ -24,6 +25,8 @@ import {
   Button,
   EmojiWrapper,
 } from "./style.js";
+
+const { REACT_APP_BASEURL } = process.env;
 
 const ActionsButton = ({ handleOpenEmoji, handleCloseEmoji, open = true }) => {
   return (
@@ -49,6 +52,10 @@ const ActiveChat = ({ user, contact }) => {
 
   useEffect(() => {
     dispatch(getMessagesRequest());
+    const socket = socketIOClient(REACT_APP_BASEURL);
+    socket.on("new_message", () => {
+      dispatch(getMessagesRequest());
+    });
   }, []);
 
   useEffect(() => {
@@ -78,6 +85,7 @@ const ActiveChat = ({ user, contact }) => {
         contactDestination: contact.id,
       })
     );
+    setMessage("");
   };
 
   return (

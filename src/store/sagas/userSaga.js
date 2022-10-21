@@ -1,5 +1,6 @@
 import { call, put } from "redux-saga/effects";
 import api from "../../services/api";
+import { getMessagesRequest } from "../reducers/messageSlice";
 import {
   getActiveChatsSuccess,
   getMessagesByUserSuccess,
@@ -31,11 +32,13 @@ function* sendMessage(action) {
       payload: { content, contactOrigin, contactDestination },
     } = action;
 
-    yield call(api.post, `messages`, {
+    const response = yield call(api.post, `messages`, {
       content,
       contactOrigin,
       contactDestination,
     });
+
+    if (response) yield put(getMessagesRequest());
   } catch (error) {}
 }
 

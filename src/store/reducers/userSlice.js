@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const contacts = createSlice({
   name: "user",
   initialState: {
-    id: "ac96db6d-9a6a-4bb6-9f1f-0eba129acece",
+    id: "e73ade23-d2f1-4665-8cf6-93964b3b294d",
     name: "Douglas",
     loading: false,
     activeChats: [],
