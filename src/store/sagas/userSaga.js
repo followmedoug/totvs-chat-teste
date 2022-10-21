@@ -7,7 +7,9 @@ import {
 } from "../reducers/userSlice";
 
 function* getActiveChats(action) {
-  const { id } = action;
+  const {
+    payload: { id },
+  } = action;
 
   try {
     const response = yield call(api.get, `contacts/${id}`);

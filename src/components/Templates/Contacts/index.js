@@ -16,7 +16,7 @@ const Contacts = ({ contacts = [], onClick, active }) => {
   const dispatch = useDispatch();
 
   const { data } = useSelector((state) => state.contact);
-  const { activeChats } = useSelector((state) => state.user);
+  const { activeChats, id } = useSelector((state) => state.user);
 
   const [showNewChat, setShowNewChat] = useState(true);
 
@@ -29,6 +29,7 @@ const Contacts = ({ contacts = [], onClick, active }) => {
       {/** TODO refatorar newChat e Header */}
       {showNewChat ? (
         <NewChat
+          id={id}
           data={data}
           closeNewChat={() => {
             setShowNewChat(false);
@@ -44,6 +45,7 @@ const Contacts = ({ contacts = [], onClick, active }) => {
           />
           <SearchBar />
           <ContactList
+            id={id}
             active={active}
             onClick={onClick}
             contacts={activeChats}

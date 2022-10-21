@@ -13,7 +13,10 @@ import {
 const Contact = ({ contact, onClick, active }) => {
   return (
     <Container active={active} onClick={() => onClick(contact)}>
-      <Avatar size="big" src={contact?.avatar} />
+      <Avatar
+        size="big"
+        src="https://www.w3schools.com/howto/img_avatar2.png"
+      />
       <ContentWrapper>
         <Line>
           <>

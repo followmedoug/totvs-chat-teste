@@ -1,37 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import ContainerMain from "./components/Templates/ContainerMain";
 import Contacts from "./components/Templates/Contacts";
 import Chat from "./components/Templates/Chat";
-import { useSelector } from "react-redux";
+
+import { getActiveChatsRequest } from "./store/reducers/userSlice";
 
 const App = () => {
+  const dispatch = useDispatch();
+
   const user = useSelector((state) => state.user);
 
-  const contacts = [
-    {
-      id: 1,
-      name: "Fulano de Tal",
-      avatar: "https://www.w3schools.com/howto/img_avatar2.png",
-      date: "19:44",
-      message: "Oi sumido",
-    },
-    {
-      id: 2,
-      name: "Fulano de Tal2",
-      avatar: "https://www.w3schools.com/howto/img_avatar2.png",
-      date: "19:45",
-      message: "Cade o dinheiro que você ta me devendo?",
-    },
-  ];
-
   const [activeChat, setActiveChat] = useState({});
+
+  useEffect(() => {
+    dispatch(getActiveChatsRequest({ id: user.id }));
+  }, []);
 
   return (
     <ContainerMain>
       <Contacts
         active={activeChat}
-        contacts={contacts}
         onClick={(contact) => setActiveChat(contact)}
       />
       <Chat user={user} activeChat={activeChat} />
