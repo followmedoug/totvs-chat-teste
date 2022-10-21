@@ -13,19 +13,19 @@ import {
 const Contact = ({ contact, onClick, active }) => {
   return (
     <Container active={active} onClick={() => onClick(contact)}>
-      <Avatar size="big" src={contact.avatar} />
+      <Avatar size="big" src={contact?.avatar} />
       <ContentWrapper>
         <Line>
           <>
-            <Name>{contact.name}</Name>
+            <Name>{contact?.name}</Name>
           </>
           <>
-            <Date>{contact.date}</Date>
+            <Date>{contact?.date}</Date>
           </>
         </Line>
         <Line>
           <MessageWrapper>
-            <Message>{contact.message}</Message>
+            <Message>{contact?.message}</Message>
           </MessageWrapper>
         </Line>
       </ContentWrapper>
