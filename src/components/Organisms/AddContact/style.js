@@ -4,7 +4,7 @@ const Container = styled.div`
   width: 35%;
   max-width: 415px;
   position: fixed;
-  left: ${({ show }) => (show ? "0" : "-500px")};
+  left: ${({ show }) => (show ? 0 : -500)};
   top: 0;
   bottom: 0;
   background-color: ${({ theme: { colors } }) => colors.background.white};
@@ -42,26 +42,48 @@ const Title = styled.p`
   margin-bottom: 14px;
   color: #fff;
 `;
-const List = styled.div`
-  flex: 1;
-  overflow-y: auto;
+
+const FormWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 15px 20px;
 `;
 
-const Item = styled.div`
-  display: flex;
-  align-items: center;
-  padding: 15px;
+const Input = styled.input`
+  flex: 1;
+  margin-bottom: 15px;
+  padding: 15px 20px;
+  border-radius: 10px;
+  background-color: ${({ theme: { colors } }) => colors.background.secondary};
+  border: 0;
+  outline: 0;
+`;
+
+const FormButton = styled.button`
+  flex: 1;
+  border: 0;
+  outline: 0;
+  color: ${({ theme: { colors } }) => colors.background.white};
+  background-color: ${({ theme: { colors } }) => colors.border.chat};
+  font-weight: bold;
+  border-radius: 10px;
+  padding: 15px 20px;
+  font-size: 18px;
   cursor: pointer;
 
   :hover {
-    background-color: ${({ theme: { colors } }) => colors.background.hover};
+    background-color: #00bfa5;
   }
 `;
 
-const Name = styled.p`
-  font-size: 1.063rem;
-  color: #000;
-  margin-left: 15px;
-`;
-
-export { Container, Header, Button, Title, List, Item, Name, TitleWrapper };
+export {
+  Container,
+  Header,
+  Button,
+  Title,
+  TitleWrapper,
+  FormWrapper,
+  Input,
+  FormButton,
+};

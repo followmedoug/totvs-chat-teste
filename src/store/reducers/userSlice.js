@@ -3,7 +3,6 @@ import { createSlice } from "@reduxjs/toolkit";
 export const contacts = createSlice({
   name: "user",
   initialState: {
-    id: "e73ade23-d2f1-4665-8cf6-93964b3b294d",
     name: "Douglas",
     loading: false,
     activeChats: [],
@@ -28,6 +27,13 @@ export const contacts = createSlice({
     sendMessageSuccess: (state) => {
       return { ...state, loading: false };
     },
+    createUserRequest: (state) => {
+      return { ...state, loading: true };
+    },
+    createuserSuccess: (state, { payload }) => {
+      localStorage.setItem("user_id", payload.id);
+      return { ...state, loading: false };
+    },
   },
 });
 
@@ -38,5 +44,7 @@ export const {
   getMessagesByUserSuccess,
   sendMessageRequest,
   sendMessageSuccess,
+  createUserRequest,
+  createuserSuccess,
 } = contacts.actions;
 export default contacts.reducer;

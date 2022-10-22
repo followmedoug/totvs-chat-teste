@@ -2,6 +2,8 @@ import { call, put } from "redux-saga/effects";
 import api from "../../services/api";
 import { getMessagesRequest } from "../reducers/messageSlice";
 import {
+  createuserSuccess,
+  getActiveChatsRequest,
   getActiveChatsSuccess,
   getMessagesByUserSuccess,
 } from "../reducers/userSlice";
@@ -40,8 +42,23 @@ function* sendMessage(action) {
       contactDestination,
     });
 
-    if (response) yield put(getMessagesRequest());
+    if (response) {
+      yield put(getMessagesRequest());
+      yield put(getActiveChatsRequest({ id: contactOrigin }));
+    }
   } catch (error) {}
 }
 
-export { getActiveChats, getMessagesByUser, sendMessage };
+function* createUser(action) {
+  try {
+    const {
+      payload: { name, email },
+    } = action;
+
+    const response = yield call(api.post, "contacts", { name, email });
+
+    yield put(createuserSuccess(response.data));
+  } catch (error) {}
+}
+
+export { getActiveChats, getMessagesByUser, sendMessage, createUser };

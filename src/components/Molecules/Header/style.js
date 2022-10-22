@@ -12,8 +12,19 @@ const AvatarWrapper = styled.div`
   display: flex;
   align-items: center;
 `;
+
 const Name = styled.p`
   margin-left: 15px;
 `;
 
-export { Container, AvatarWrapper, Name };
+const IconWrapper = styled.div`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+`;
+
+export { Container, AvatarWrapper, Name, IconWrapper };

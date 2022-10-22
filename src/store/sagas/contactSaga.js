@@ -1,6 +1,9 @@
 import { call, put } from "redux-saga/effects";
 import api from "../../services/api";
-import { getContactsSuccess } from "../reducers/contactSlice";
+import {
+  getContactsRequest,
+  getContactsSuccess,
+} from "../reducers/contactSlice";
 
 function* getContacts() {
   try {
@@ -10,4 +13,14 @@ function* getContacts() {
   } catch (error) {}
 }
 
-export { getContacts };
+function* createContact({ payload }) {
+  try {
+    const { name, email } = payload;
+
+    yield call(api.post, "contacts", { name, email });
+
+    yield put(getContactsRequest());
+  } catch (error) {}
+}
+
+export { getContacts, createContact };

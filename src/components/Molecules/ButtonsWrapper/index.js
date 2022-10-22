@@ -1,17 +1,8 @@
-import Icon from "@mui/material/Icon";
 import React from "react";
-import { Container, IconWrapper } from "./style";
+import Container from "./style";
 
-const ButtonsWrapper = ({ buttons = [] }) => {
-  return (
-    <Container>
-      {buttons.map((btn, key) => (
-        <IconWrapper key={key}>
-          <Icon children={btn} />
-        </IconWrapper>
-      ))}
-    </Container>
-  );
+const ButtonsWrapper = ({ children }) => {
+  return <Container>{children}</Container>;
 };
 
 export default ButtonsWrapper;

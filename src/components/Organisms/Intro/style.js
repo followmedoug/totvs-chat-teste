@@ -24,4 +24,40 @@ const Text = styled.p`
   line-height: 1.7;
 `;
 
-export { Container, Text, Title };
+const ContentWrapper = styled.div`
+  text-align: center;
+`;
+
+const FormWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const Input = styled.input`
+  width: 375px;
+  border: 0;
+  outline: 0;
+  background-color: ${({ theme: { colors } }) => colors.background.secondary};
+  border-radius: 10px;
+  padding: 15px 20px;
+  margin: 10px 0;
+`;
+
+const Button = styled.button`
+  width: 375px;
+  border: 0;
+  outline: 0;
+  color: ${({ theme: { colors } }) => colors.background.white};
+  background-color: ${({ theme: { colors } }) => colors.border.chat};
+  font-weight: bold;
+  border-radius: 10px;
+  padding: 15px 20px;
+  font-size: 18px;
+  cursor: pointer;
+
+  :hover {
+    background-color: #00bfa5;
+  }
+`;
+
+export { Container, Text, Title, ContentWrapper, FormWrapper, Input, Button };

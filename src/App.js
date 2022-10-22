@@ -10,12 +10,14 @@ import { getActiveChatsRequest } from "./store/reducers/userSlice";
 const App = () => {
   const dispatch = useDispatch();
 
+  const id = localStorage.getItem("user_id");
+
   const user = useSelector((state) => state.user);
 
   const [activeChat, setActiveChat] = useState({});
 
   useEffect(() => {
-    dispatch(getActiveChatsRequest({ id: user.id }));
+    dispatch(getActiveChatsRequest({ id }));
   }, []);
 
   return (

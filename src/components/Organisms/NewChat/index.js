@@ -2,17 +2,28 @@ import React from "react";
 
 import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
 
-import { Container, Header, Button, Title, List, Item, Name } from "./style";
+import {
+  Container,
+  Header,
+  Button,
+  Title,
+  List,
+  Item,
+  Name,
+  TitleWrapper,
+} from "./style";
 import Avatar from "../../Atoms/Avatar";
 
-const NewChat = ({ closeNewChat, data, onClick, id }) => {
+const NewChat = ({ closeNewChat, data, onClick, id, show }) => {
   return (
-    <Container>
+    <Container show={show}>
       <Header>
         <Button onClick={() => closeNewChat()}>
           <ArrowBackRoundedIcon style={{ color: "#fff" }} />
         </Button>
-        <Title>Nova Conversa</Title>
+        <TitleWrapper>
+          <Title>Nova Conversa</Title>
+        </TitleWrapper>
       </Header>
       <List>
         {data

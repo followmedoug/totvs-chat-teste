@@ -1,9 +1,19 @@
 import React from "react";
+import ChatRounded from "@mui/icons-material/ChatRounded";
+import PersonAddAltRoundedIcon from "@mui/icons-material/PersonAddAltRounded";
+
 import Avatar from "../../Atoms/Avatar";
 import ButtonsWrapper from "../../Molecules/ButtonsWrapper";
-import { Container, AvatarWrapper, Name } from "./style";
+import { Container, AvatarWrapper, Name, IconWrapper } from "./style";
 
-const Header = ({ avatarLink, avatarDescription, buttons, name = "" }) => {
+const Header = ({
+  avatarLink,
+  avatarDescription,
+  name = "",
+  onClick,
+  showButton,
+  handleAddContact,
+}) => {
   return (
     <Container>
       {name !== "" ? (
@@ -14,7 +24,16 @@ const Header = ({ avatarLink, avatarDescription, buttons, name = "" }) => {
       ) : (
         <Avatar src={avatarLink} alt={avatarDescription} />
       )}
-      <ButtonsWrapper buttons={buttons} />
+      {showButton && (
+        <ButtonsWrapper>
+          <IconWrapper onClick={handleAddContact}>
+            <PersonAddAltRoundedIcon />
+          </IconWrapper>
+          <IconWrapper onClick={onClick}>
+            <ChatRounded />
+          </IconWrapper>
+        </ButtonsWrapper>
+      )}
     </Container>
   );
 };
