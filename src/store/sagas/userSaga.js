@@ -3,7 +3,6 @@ import api from "../../services/api";
 import { getMessagesRequest } from "../reducers/messageSlice";
 import {
   createuserSuccess,
-  getActiveChatsRequest,
   getActiveChatsSuccess,
   getMessagesByUserSuccess,
 } from "../reducers/userSlice";
@@ -44,7 +43,6 @@ function* sendMessage(action) {
 
     if (response) {
       yield put(getMessagesRequest());
-      yield put(getActiveChatsRequest({ id: contactOrigin }));
     }
   } catch (error) {}
 }

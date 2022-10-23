@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import ContainerMain from "./components/Templates/ContainerMain";
@@ -10,21 +10,24 @@ import { getActiveChatsRequest } from "./store/reducers/userSlice";
 const App = () => {
   const dispatch = useDispatch();
 
-  const id = localStorage.getItem("user_id");
-
   const user = useSelector((state) => state.user);
 
   const [activeChat, setActiveChat] = useState({});
 
-  useEffect(() => {
-    dispatch(getActiveChatsRequest({ id }));
-  }, []);
+  const handleActiveChats = () => {
+    const id = localStorage.getItem("user_id");
+
+    if (id) dispatch(getActiveChatsRequest({ id }));
+  };
 
   return (
     <ContainerMain>
       <Contacts
         active={activeChat}
-        onClick={(contact) => setActiveChat(contact)}
+        onClick={(contact) => {
+          setActiveChat(contact);
+          handleActiveChats();
+        }}
       />
       <Chat user={user} activeChat={activeChat} />
     </ContainerMain>

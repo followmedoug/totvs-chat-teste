@@ -42,10 +42,12 @@ const ActionsButton = ({ handleOpenEmoji, handleCloseEmoji, open = true }) => {
 };
 
 const ActiveChat = ({ user, contact }) => {
-  const { data } = useSelector((state) => state.message);
+  const id = localStorage.getItem("user_id");
 
   const dispatch = useDispatch();
   const body = useRef();
+
+  const { data } = useSelector((state) => state.message);
 
   const [isEmojiOpen, setIsEmojiOpen] = useState(false);
   const [message, setMessage] = useState("");
@@ -81,12 +83,27 @@ const ActiveChat = ({ user, contact }) => {
     dispatch(
       sendMessageRequest({
         content: message,
-        contactOrigin: user.id,
+        contactOrigin: id,
         contactDestination: contact.id,
       })
     );
     setMessage("");
   };
+
+  useEffect(() => {
+    const listener = (e) => {
+      if (e.code === "Enter") {
+        e.preventDefault();
+        handleSendMessage();
+      }
+    };
+
+    document.addEventListener("keydown", listener);
+
+    return () => {
+      document.removeEventListener("keydown", listener);
+    };
+  }, []);
 
   return (
     <Container>

@@ -9,13 +9,15 @@ import {
 } from "./style";
 
 const Message = ({ data, user }) => {
+  const id = localStorage.getItem("user_id");
+
   return (
     <>
       {!data ? (
         <></>
       ) : (
-        <Container author={user.id === data?.origin?.id}>
-          <MessageItem author={user.id === data?.origin?.id}>
+        <Container author={id === data?.origin?.id}>
+          <MessageItem author={id === data?.origin?.id}>
             <TextWrapper>
               <Text>{data.content}</Text>
             </TextWrapper>

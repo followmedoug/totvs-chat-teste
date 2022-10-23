@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
 import {
   Container,
@@ -21,7 +21,23 @@ const AddContact = ({ closeAddContact, show }) => {
 
   const handleCreateContact = () => {
     dispatch(createContactRequest({ name, email }));
+    closeAddContact();
   };
+
+  useEffect(() => {
+    const listener = (e) => {
+      if (e.code === "Enter") {
+        e.preventDefault();
+        handleCreateContact();
+      }
+    };
+
+    document.addEventListener("keydown", listener);
+
+    return () => {
+      document.removeEventListener("keydown", listener);
+    };
+  }, [name, email]);
 
   return (
     <Container show={show}>
