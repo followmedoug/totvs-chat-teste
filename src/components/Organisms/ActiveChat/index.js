@@ -103,7 +103,7 @@ const ActiveChat = ({ user, contact }) => {
     return () => {
       document.removeEventListener("keydown", listener);
     };
-  }, []);
+  }, [message]);
 
   return (
     <Container>

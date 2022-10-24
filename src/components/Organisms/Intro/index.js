@@ -38,7 +38,7 @@ const Intro = () => {
     return () => {
       document.removeEventListener("keydown", listener);
     };
-  }, []);
+  }, [name, email]);
 
   return (
     <Container>

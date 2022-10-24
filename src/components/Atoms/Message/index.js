@@ -8,7 +8,7 @@ import {
   DateWrapper,
 } from "./style";
 
-const Message = ({ data, user }) => {
+const Message = ({ data }) => {
   const id = localStorage.getItem("user_id");
 
   return (
