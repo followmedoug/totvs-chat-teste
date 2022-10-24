@@ -1,11 +1,16 @@
 import axios from "axios";
 
-const { REACT_APP_BASEURL } = process.env;
+const { REACT_APP_BASEURL, REACT_APP_BASEURL_STG, REACT_APP_BASEURL_PRD } =
+  process.env;
 
-console.log(window.location.hostname);
+const env = window.location.hostname.split(".")[1];
 
 const api = axios.create({
-  baseURL: REACT_APP_BASEURL,
+  baseURL: !env
+    ? REACT_APP_BASEURL
+    : env === "stg"
+    ? REACT_APP_BASEURL_STG
+    : REACT_APP_BASEURL_PRD,
 });
 
 api.interceptors.response.use(
