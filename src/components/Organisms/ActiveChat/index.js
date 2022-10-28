@@ -114,13 +114,6 @@ const ActiveChat = ({ user, contact }) => {
     };
   }, [message]);
 
-  const filter1 = data
-    .filter(({ origin }) => origin.id === id || origin.id === contact.id)
-    .filter(
-      ({ destination }) =>
-        destination.id === id || destination.id === contact.id
-    );
-
   return (
     <Container>
       <Header
