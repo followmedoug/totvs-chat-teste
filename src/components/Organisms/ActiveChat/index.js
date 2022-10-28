@@ -26,7 +26,8 @@ import {
   EmojiWrapper,
 } from "./style.js";
 
-const { REACT_APP_BASEURL } = process.env;
+const { REACT_APP_BASEURL, REACT_APP_BASEURL_STG, REACT_APP_BASEURL_PRD } =
+  process.env;
 
 const ActionsButton = ({ handleOpenEmoji, handleCloseEmoji, open = true }) => {
   return (
@@ -53,8 +54,16 @@ const ActiveChat = ({ user, contact }) => {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
+    const env = window.location.hostname.split(".")[1];
+
     dispatch(getMessagesRequest());
-    const socket = socketIOClient(REACT_APP_BASEURL);
+    const socket = socketIOClient(
+      !env
+        ? REACT_APP_BASEURL
+        : env === "stg"
+        ? REACT_APP_BASEURL_STG
+        : REACT_APP_BASEURL_PRD
+    );
     socket.on("new_message", () => {
       dispatch(getMessagesRequest());
     });
