@@ -21,6 +21,11 @@ const Contacts = ({ onClick, active }) => {
   const [showNewChat, setShowNewChat] = useState(false);
   const [showNewContact, setShowNewContact] = useState(false);
 
+  const handleNewChat = () => {
+    dispatch(getContactsRequest());
+    setShowNewChat(true);
+  };
+
   useEffect(() => {
     dispatch(getContactsRequest());
   }, []);
@@ -52,7 +57,7 @@ const Contacts = ({ onClick, active }) => {
             showButton
             avatarLink="https://www.w3schools.com/howto/img_avatar2.png"
             avatarDescription="Avatar do usuário da conta"
-            onClick={() => setShowNewChat(true)}
+            onClick={() => handleNewChat()}
             handleAddContact={() => setShowNewContact(true)}
           />
           <SearchBar />
