@@ -8,6 +8,7 @@ import NewChat from "../../Organisms/NewChat";
 import AddContact from "../../Organisms/AddContact";
 import { getContactsRequest } from "../../../store/reducers/contactSlice";
 import Container from "./style";
+import { getActiveChatsRequest } from "../../../store/reducers/userSlice";
 
 const Contacts = ({ onClick, active }) => {
   const dispatch = useDispatch();
@@ -23,6 +24,10 @@ const Contacts = ({ onClick, active }) => {
   useEffect(() => {
     dispatch(getContactsRequest());
   }, []);
+
+  useEffect(() => {
+    dispatch(getActiveChatsRequest({ id }));
+  }, [id]);
 
   return (
     <Container>

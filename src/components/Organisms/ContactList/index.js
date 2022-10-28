@@ -5,7 +5,7 @@ import Contact from "../../Molecules/Contact";
 const ContactList = ({ contacts = [], onClick, active, id }) => {
   return (
     <Container>
-      {contacts.length &&
+      {contacts.length > 0 &&
         contacts
           .filter((item) => item?.id !== id)
           .map((contact, key) => (
