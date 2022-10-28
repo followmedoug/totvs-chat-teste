@@ -8,16 +8,18 @@ import {
   DateWrapper,
 } from "./style";
 
-const Message = ({ data }) => {
+const Message = ({ data, contact }) => {
   const id = localStorage.getItem("user_id");
+
+  const author = id === data?.origin?.id;
 
   return (
     <>
       {!data ? (
         <></>
       ) : (
-        <Container author={id === data?.origin?.id}>
-          <MessageItem author={id === data?.origin?.id}>
+        <Container author={author}>
+          <MessageItem author={author}>
             <TextWrapper>
               <Text>{data.content}</Text>
             </TextWrapper>

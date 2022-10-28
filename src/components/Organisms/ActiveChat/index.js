@@ -114,6 +114,13 @@ const ActiveChat = ({ user, contact }) => {
     };
   }, [message]);
 
+  const filter1 = data
+    .filter(({ origin }) => origin.id === id || origin.id === contact.id)
+    .filter(
+      ({ destination }) =>
+        destination.id === id || destination.id === contact.id
+    );
+
   return (
     <Container>
       <Header
@@ -122,9 +129,15 @@ const ActiveChat = ({ user, contact }) => {
         buttons={[<SearchRoundedIcon />, <MoreVertRoundedIcon />]}
       />
       <ChatBody ref={body}>
-        {data.map((msg) => (
-          <Message user={user} key={msg.id} data={msg} />
-        ))}
+        {data
+          .filter(({ origin }) => origin.id === id || origin.id === contact.id)
+          .filter(
+            ({ destination }) =>
+              destination.id === id || destination.id === contact.id
+          )
+          .map((msg) => (
+            <Message user={user} key={msg.id} data={msg} contact={contact} />
+          ))}
       </ChatBody>
       <EmojiWrapper open={isEmojiOpen}>
         <EmojiPicker
